@@ -27,17 +27,16 @@ module "my_AZ_1a" {
 
 
 module "my_AZ_1b" {
-     source = "./Az-1b"
+     source = "./AZ-1b"
      my_Vpc_id_B = module.My_VPC.id
-
-     
 }
 
 
 
-module "my_ssm" {
-     source = "./SSM"
+module "ec2" {
+     source = "./EC2"
      key_name = "my-key"
-     subnet_id = module.my_AZ_1a.sub_public_A
-
+     subnet_id_A = module.my_AZ_1a.sub_public_A
+     subnet_id_B = module.my_AZ_1b.sub_public_B
+     Vpc_id_sg = module.My_VPC.id
 }
