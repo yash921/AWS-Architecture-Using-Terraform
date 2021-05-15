@@ -36,7 +36,9 @@ module "my_AZ_1b" {
 module "ec2" {
      source = "./EC2"
      key_name = "my-key"
-     subnet_id_A = module.my_AZ_1a.sub_public_A
-     subnet_id_B = module.my_AZ_1b.sub_public_B
+     pub_subnet_id_A = module.my_AZ_1a.sub_public_A
+     pub_subnet_id_B = module.my_AZ_1b.sub_public_B
+     pri_subnet_id_A = module.my_AZ_1a.sub_App_A
+     pri_subnet_id_B = module.my_AZ_1b.sub_App_B
      Vpc_id_sg = module.My_VPC.id
 }

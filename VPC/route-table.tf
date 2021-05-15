@@ -16,17 +16,17 @@ resource "aws_main_route_table_association" "a" {
   route_table_id = "${aws_route_table.public.id}"
 }
 
-variable "pub_AZ_A" {
-  
-}
+variable "pub_AZ_A" {}
+ 
+
 resource "aws_route_table_association" "b" {
   subnet_id      = var.pub_AZ_A
   route_table_id = aws_route_table.public.id
 }
 
-variable "pub_AZ_B" {
-  
-}
+variable "pub_AZ_B" {}
+
+
 resource "aws_route_table_association" "c" {
   subnet_id      = var.pub_AZ_B
   route_table_id = aws_route_table.public.id
@@ -34,7 +34,7 @@ resource "aws_route_table_association" "c" {
 
 #############################################################
 
-resource "aws_route_table" "private-A" {
+resource "aws_route_table" "private_A" {
   vpc_id = "${aws_vpc.main.id}"
 
   route {
@@ -48,7 +48,7 @@ resource "aws_route_table" "private-A" {
 }
 
 
-resource "aws_route_table" "private-B" {
+resource "aws_route_table" "private_B" {
   vpc_id = "${aws_vpc.main.id}"
 
   route {
@@ -66,30 +66,27 @@ variable "private_AZ_A" {
 }
 resource "aws_route_table_association" "d" {
   subnet_id      = var.private_AZ_A
-  route_table_id = aws_route_table.private-A.id
+  route_table_id = aws_route_table.private_A.id
 }
 
-variable "Data_AZ_A" {
-  
-}
+variable "Data_AZ_A" {}
+
 resource "aws_route_table_association" "e" {
   subnet_id      = var.Data_AZ_A
-  route_table_id = aws_route_table.private-A.id
+  route_table_id = aws_route_table.private_A.id
 }
 
 
-variable "private_AZ_B" {
-  
-}
+variable "private_AZ_B" {}
+
 resource "aws_route_table_association" "f" {
   subnet_id      = var.private_AZ_B
-  route_table_id = aws_route_table.private-B.id
+  route_table_id = aws_route_table.private_B.id
 }
 
-variable "Data_AZ_B" {
-  
-}
+variable "Data_AZ_B" {}
+
 resource "aws_route_table_association" "g" {
   subnet_id      = var.Data_AZ_B
-  route_table_id = aws_route_table.private-B.id
+  route_table_id = aws_route_table.private_B.id
 }

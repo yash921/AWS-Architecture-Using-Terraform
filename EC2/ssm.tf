@@ -72,7 +72,8 @@ resource "aws_ssm_document" "foo" {
          "inputs": {
             "runCommand": [
                "sudo yum install -y httpd",
-               "sudo yum install git -y"
+               "sudo echo 'Git Commit Time!!' >> /var/www/html/index.html",
+               "sudo systemctl start httpd"
             ]
          }
       }

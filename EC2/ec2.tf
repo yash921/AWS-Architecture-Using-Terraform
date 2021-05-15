@@ -2,7 +2,6 @@
 variable "key_name" {}
 
 
-
 resource "tls_private_key" "example" {
   algorithm = "RSA"
   rsa_bits  = 4096
@@ -22,26 +21,30 @@ resource "local_file" "deploy-key" {
 
 
 
-variable "subnet_id_A" {}
+variable "pri_subnet_id_A" {}
 
 resource "aws_instance" "web_A" {
     ami = "ami-09a7bbd08886aafdf"
     instance_type = "t2.micro"
-    subnet_id = var.subnet_id_A
-    vpc_security_group_ids = [aws_security_group.WP_internal_sg.id]
+    subnet_id = var.pri_subnet_id_A
+    vpc_security_group_ids = [aws_security_group.InternalWeb.id]
     key_name = aws_key_pair.generated_key.key_name
     iam_instance_profile = aws_iam_instance_profile.test_profile.name
 }
 
 
-variable "subnet_id_B" {}
+
+variable "pri_subnet_id_B" {}
 
 resource "aws_instance" "web_B" {
     ami = "ami-09a7bbd08886aafdf"
     instance_type = "t2.micro"
-    subnet_id = var.subnet_id_B
-    vpc_security_group_ids = [aws_security_group.WP_internal_sg.id]
+    subnet_id = var.pri_subnet_id_B
+    vpc_security_group_ids = [aws_security_group.InternalWeb.id]
     key_name = aws_key_pair.generated_key.key_name
     iam_instance_profile = aws_iam_instance_profile.test_profile.name
 }
+
+
+
 
