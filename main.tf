@@ -3,6 +3,15 @@ provider "aws" {
      profile = "YashAWS"
 }
 
+variable "Repo_Link" {
+  description = "Application Code URL"
+  type        = string
+} 
+
+variable "Repo_Name" {
+  description = "The repo name in which code is present"
+  type        = string
+} 
 
 module "My_VPC" {
      source = "./VPC"
@@ -41,4 +50,6 @@ module "ec2" {
      pri_subnet_id_A = module.my_AZ_1a.sub_App_A
      pri_subnet_id_B = module.my_AZ_1b.sub_App_B
      Vpc_id_sg = module.My_VPC.id
+     Git_url = var.Repo_Link
+     Git_folder = var.Repo_Name
 }

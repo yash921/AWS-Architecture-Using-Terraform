@@ -1,3 +1,6 @@
+variable "Git_url" {}
+variable "Git_folder" {}
+
 resource "aws_iam_role" "test_role" {
   name = "test_role"
 
@@ -71,8 +74,9 @@ resource "aws_ssm_document" "foo" {
          "name": "configureServer",
          "inputs": {
             "runCommand": [
-               "sudo yum install -y httpd",
-               "sudo echo 'Git Commit Time!!' >> /var/www/html/index.html",
+               "sudo yum install -y httpd git php",
+               "sudo git clone ${var.Git_url}",
+               "sudo mv ${var.Git_folder}/* /var/www/html/",
                "sudo systemctl start httpd"
             ]
          }

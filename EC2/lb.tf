@@ -62,3 +62,4 @@ resource "aws_lb_listener" "my-test-alb-listner" {
     target_group_arn = "${aws_lb_target_group.my-target-group.arn}"
   }
 }
+
